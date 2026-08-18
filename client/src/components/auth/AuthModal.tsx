@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAuth, type UserRole } from '../../context/AuthContext';
 import { useUI } from '../../context/UIContext';
 import { Modal } from '../common/Modal';
-import { UserCheck, ShieldCheck, ArrowRight, Home } from 'lucide-react';
+import { UserCheck, ShieldCheck, ArrowRight, Home, Compass } from 'lucide-react';
 
 export const AuthModal: React.FC = () => {
   const { authModalOpen, setAuthModalOpen, addToast, setCurrentView } = useUI();
@@ -18,13 +18,17 @@ export const AuthModal: React.FC = () => {
     login(email, selectedRole);
     setAuthModalOpen(false);
     
+    let welcomeName = 'Alexander Wright';
+    if (selectedRole === 'architect') welcomeName = 'Ethan Rodrigues (AIA)';
+    else if (selectedRole === 'designer') welcomeName = 'Elena Rostova';
+
     addToast({
       type: 'success',
-      title: `Welcome to AERA, ${selectedRole === 'designer' ? 'Ethan Rodrigues' : 'Alexander Wright'}`,
-      message: 'Spatial workspace & active project loaded.',
+      title: `Welcome to AERA, ${welcomeName}`,
+      message: 'Spatial workspace & active blueprints loaded.',
     });
 
-    if (selectedRole === 'designer') {
+    if (selectedRole === 'architect' || selectedRole === 'designer') {
       setCurrentView('designer_dashboard');
     } else {
       setCurrentView('dashboard');
@@ -35,15 +39,16 @@ export const AuthModal: React.FC = () => {
     <Modal
       isOpen={authModalOpen}
       onClose={() => setAuthModalOpen(false)}
-      maxWidth="max-w-md"
+      maxWidth="max-w-lg"
       title={<span className="text-neutral-950 font-extrabold">{mode === 'login' ? 'Sign In to AERA' : 'Create Your AERA Account'}</span>}
       subtitle="Spatial intelligence, layout optimization & architectural collaboration"
     >
       <form onSubmit={handleSubmit} className="space-y-4 text-neutral-950">
-        {/* Role Selector Tabs */}
+        {/* Role Selector Tabs (3 Personas: Homeowner, Designer, Architect) */}
         <div className="space-y-1.5">
           <label className="text-xs font-bold text-neutral-900 block">Select Profile Persona</label>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            {/* 1. Homeowner */}
             <button
               type="button"
               onClick={() => {
@@ -63,11 +68,12 @@ export const AuthModal: React.FC = () => {
               <p className="text-[10px] text-neutral-600 font-medium mt-0.5">Design & optimize spaces</p>
             </button>
 
+            {/* 2. Interior Designer */}
             <button
               type="button"
               onClick={() => {
                 setSelectedRole('designer');
-                setEmail('ethan@rodrigues-spatial.com');
+                setEmail('elena@rostovadesign.com');
               }}
               className={`p-3 rounded-xl border text-left transition-all ${
                 selectedRole === 'designer'
@@ -76,10 +82,30 @@ export const AuthModal: React.FC = () => {
               }`}
             >
               <div className="flex items-center gap-1.5 text-xs font-bold text-neutral-950">
-                <UserCheck className="w-3.5 h-3.5 text-blue-600" />
-                <span>Interior Designer</span>
+                <UserCheck className="w-3.5 h-3.5 text-purple-600" />
+                <span>Designer</span>
               </div>
-              <p className="text-[10px] text-neutral-600 font-medium mt-0.5">Review client blueprints</p>
+              <p className="text-[10px] text-neutral-600 font-medium mt-0.5">Styling & aesthetics</p>
+            </button>
+
+            {/* 3. Licensed Architect */}
+            <button
+              type="button"
+              onClick={() => {
+                setSelectedRole('architect');
+                setEmail('ethan@rodrigues-spatial.com');
+              }}
+              className={`p-3 rounded-xl border text-left transition-all ${
+                selectedRole === 'architect'
+                  ? 'border-neutral-950 bg-white ring-2 ring-neutral-950/10 shadow-xs'
+                  : 'border-[#E8E6DF] bg-[#FAF9F6] text-neutral-700 hover:bg-white'
+              }`}
+            >
+              <div className="flex items-center gap-1.5 text-xs font-bold text-neutral-950">
+                <Compass className="w-3.5 h-3.5 text-blue-600" />
+                <span>Architect</span>
+              </div>
+              <p className="text-[10px] text-neutral-600 font-medium mt-0.5">AIA CAD & clearances</p>
             </button>
           </div>
         </div>

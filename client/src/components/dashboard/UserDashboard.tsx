@@ -11,13 +11,15 @@ import {
   Award,
   Layers,
   Box,
+  Palette,
+  MessageSquare,
+  Compass,
 } from 'lucide-react';
 
 export const UserDashboard: React.FC = () => {
   const { setCurrentView, setStudioMode, addToast } = useUI();
-  const { projects, selectProject } = useProject();
+  const { projects, selectProject, optimizeConflictAutomatically, applyTheme } = useProject();
   const { user } = useAuth();
-
 
   const handleOpenProject = (projectId: string, mode: '2d' | '3d' = '2d') => {
     selectProject(projectId);
@@ -59,7 +61,85 @@ export const UserDashboard: React.FC = () => {
         </div>
       </div>
 
+      {/* AERA Spatial AI Assistant Feature Card */}
+      <div className="bg-white dark:bg-[#161B22] rounded-3xl border border-[#E8E6DF] dark:border-[#21262D] p-6 shadow-xs space-y-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-2xl bg-neutral-950 dark:bg-white text-white dark:text-neutral-950 flex items-center justify-center shadow-xs">
+              <Sparkles className="w-5 h-5 text-[#D4AF37] dark:text-[#8C5232]" />
+            </div>
+            <div>
+              <h3 className="text-sm font-extrabold text-neutral-900 dark:text-white flex items-center gap-2">
+                <span>AERA Spatial AI Assistant</span>
+                <span className="text-[9px] font-mono font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800">
+                  Active Spatial Co-Pilot
+                </span>
+              </h3>
+              <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                Deterministic whole-room dimension intelligence, collision resolution & theme recommendations.
+              </p>
+            </div>
+          </div>
 
+          <button
+            onClick={() => handleOpenProject(projects[0].id, '2d')}
+            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 bg-[#FAF9F6] dark:bg-[#21262D] hover:bg-[#F0EEE8] dark:hover:bg-[#282E37] text-neutral-800 dark:text-neutral-200 border border-[#E8E6DF] dark:border-[#30363D] rounded-xl text-xs font-bold transition-all"
+          >
+            <Compass className="w-3.5 h-3.5 text-[#B26A4A] dark:text-[#D4AF37]" />
+            <span>Launch AI Studio</span>
+          </button>
+        </div>
+
+        {/* Assistant Message Bubble */}
+        <div className="p-4 bg-[#FAF9F6] dark:bg-[#12161E] rounded-2xl border border-[#E8E6DF] dark:border-[#21262D] space-y-3">
+          <p className="text-xs text-neutral-800 dark:text-neutral-200 leading-relaxed">
+            Hello <span className="font-bold">{user.name}</span>! I analyzed your active spaces. Your Master Bedroom blueprint maintains optimal <span className="font-bold text-emerald-600 dark:text-emerald-400">105 cm door clearance</span> with a <span className="font-bold text-[#8C5232] dark:text-[#D4AF37]">94/100 Hype Score</span>. Select a quick action:
+          </p>
+
+          {/* Quick Action Chips */}
+          <div className="flex flex-wrap items-center gap-2 pt-1">
+            <button
+              onClick={() => {
+                optimizeConflictAutomatically();
+                addToast({
+                  type: 'success',
+                  title: 'Auto-Optimization Applied',
+                  message: 'All furniture arranged for maximum walking clearance & 0 collisions.',
+                });
+              }}
+              className="px-3 py-1.5 bg-white dark:bg-[#1C2128] hover:bg-[#FAF4ED] dark:hover:bg-[#282115] text-neutral-800 dark:text-neutral-200 border border-[#E8E6DF] dark:border-[#30363D] rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-2xs transition-all active:scale-95"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-[#D4AF37] dark:text-[#8C5232]" />
+              <span>✨ Auto-Optimize Circulation</span>
+            </button>
+
+            <button
+              onClick={() => {
+                applyTheme('theme-japandi');
+                addToast({
+                  type: 'success',
+                  title: 'Theme Applied',
+                  message: 'Japandi Earth & Hinoki palette synced to 2D & 3D.',
+                });
+              }}
+              className="px-3 py-1.5 bg-white dark:bg-[#1C2128] hover:bg-[#FAF4ED] dark:hover:bg-[#282115] text-neutral-800 dark:text-neutral-200 border border-[#E8E6DF] dark:border-[#30363D] rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-2xs transition-all active:scale-95"
+            >
+              <Palette className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+              <span>🎨 Recommend Japandi Theme</span>
+            </button>
+
+            <button
+              onClick={() => {
+                setCurrentView('chat');
+              }}
+              className="px-3 py-1.5 bg-white dark:bg-[#1C2128] hover:bg-[#FAF4ED] dark:hover:bg-[#282115] text-neutral-800 dark:text-neutral-200 border border-[#E8E6DF] dark:border-[#30363D] rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-2xs transition-all active:scale-95"
+            >
+              <MessageSquare className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+              <span>💬 Consult AIA Architect</span>
+            </button>
+          </div>
+        </div>
+      </div>
 
       {/* Projects Grid */}
       <div className="space-y-4">

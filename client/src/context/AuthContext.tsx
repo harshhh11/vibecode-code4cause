@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 
-export type UserRole = 'user' | 'designer';
+export type UserRole = 'user' | 'designer' | 'architect';
 
 export interface UserProfile {
   id: string;
@@ -51,24 +51,44 @@ const DEFAULT_USER: UserProfile = {
 };
 
 const DESIGNER_USER: UserProfile = {
+  id: 'des-elena-rostova',
+  name: 'Elena Rostova',
+  email: 'elena@rostovadesign.com',
+  role: 'designer',
+  avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=160&q=80',
+  title: 'Senior Interior Designer',
+  phone: '+1 (212) 555-0182',
+  location: 'Manhattan, New York, NY',
+  firmName: 'Elena Rostova Interiors',
+  hourlyRate: 95,
+  ratePerSqFt: 3.5,
+  preferredStyle: 'Japandi Earth & Wabi-Sabi',
+  unitPreference: 'ft',
+  targetClearanceCm: 90,
+  aiSensitivity: 'balanced',
+  notificationsEnabled: true,
+  bio: 'Interior designer specializing in Japandi, Scandinavian minimalist styling, and bespoke material palettes.',
+};
+
+const ARCHITECT_USER: UserProfile = {
   id: 'des-ethan-rodrigues',
   name: 'Ethan Rodrigues',
   email: 'ethan@rodrigues-spatial.com',
-  role: 'designer',
+  role: 'architect',
   avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80',
-  title: 'Principal Spatial Architect',
+  title: 'Principal AIA Spatial Architect',
   phone: '+1 (415) 889-3200',
   location: 'SoHo, New York / San Francisco',
   firmName: 'Rodrigues Spatial Architecture LLC',
   licenseId: 'AIA-NY #849204',
-  hourlyRate: 120,
-  ratePerSqFt: 4.5,
-  preferredStyle: 'Japandi Earth & Hinoki',
+  hourlyRate: 140,
+  ratePerSqFt: 5.0,
+  preferredStyle: 'Warm Minimalist & Structural Modernism',
   unitPreference: 'ft',
   targetClearanceCm: 95,
   aiSensitivity: 'spacious',
   notificationsEnabled: true,
-  bio: 'Licensed AIA Spatial Architect with 12+ years experience in high-density residential layouts and millwork design.',
+  bio: 'Licensed AIA Spatial Architect with 12+ years experience in CAD structural clearances, door swing safety, and residential space planning.',
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -80,7 +100,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const setRole = (newRole: UserRole) => {
     setRoleState(newRole);
-    if (newRole === 'designer') {
+    if (newRole === 'architect') {
+      setUser(ARCHITECT_USER);
+    } else if (newRole === 'designer') {
       setUser(DESIGNER_USER);
     } else {
       setUser(DEFAULT_USER);

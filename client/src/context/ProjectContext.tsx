@@ -69,7 +69,8 @@ interface ProjectContextType {
   customThemes: ColorTheme[];
   applyCustomPalette: (palette: ColorPalette, name?: string) => void;
   applyLayout: (layout: GeneratedLayoutOption) => void;
-  optimizeConflictAutomatically: (conflictId: string) => void;
+  optimizeConflictAutomatically: (conflictId?: string) => void;
+
 
   createProject: (newProject: Partial<Project>, initialFurniture?: FurnitureItem[]) => string;
   saveVersion: (note?: string) => void;
