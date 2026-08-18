@@ -2,7 +2,8 @@ import React, { createContext, useContext, useState, useMemo, useCallback } from
 import type { Project, RoomData, Dimension2D, DoorElement, WindowElement, ObstacleElement } from '../types/project';
 import type { FurnitureItem } from '../types/furniture';
 import type { LayoutScore, ConflictWarning, WalkingPathSegment, GeneratedLayoutOption } from '../types/layout';
-import type { ColorTheme } from '../types/theme';
+import type { ColorTheme, ColorPalette } from '../types/theme';
+
 import { SAMPLE_PROJECTS, SAMPLE_ROOM_FURNITURE } from '../data/sampleProjects';
 import { COLOR_THEMES } from '../data/colorThemes';
 import { computeLayoutScoreAndConflicts } from '../utils/layoutScorer';
@@ -65,6 +66,8 @@ interface ProjectContextType {
 
 
   applyTheme: (themeId: string) => void;
+  customThemes: ColorTheme[];
+  applyCustomPalette: (palette: ColorPalette, name?: string) => void;
   applyLayout: (layout: GeneratedLayoutOption) => void;
   optimizeConflictAutomatically: (conflictId: string) => void;
 
@@ -73,6 +76,7 @@ interface ProjectContextType {
   restoreVersion: (versionId: string) => void;
   setExistingFurnitureMode: (enabled: boolean) => void;
 }
+
 
 const ProjectContext = createContext<ProjectContextType | undefined>(undefined);
 
@@ -89,7 +93,7 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [selectedFurnitureId, setSelectedFurnitureId] = useState<string | null>(null);
   const [selectedDoorId, setSelectedDoorId] = useState<string | null>(null);
   const [selectedWindowId, setSelectedWindowId] = useState<string | null>(null);
-
+  const [customThemes, setCustomThemes] = useState<ColorTheme[]>([]);
 
   const [history, setHistory] = useState<Array<Record<string, FurnitureItem[]>>>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(-1);
@@ -116,10 +120,12 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   const activeTheme = useMemo(() => {
     return (
+      customThemes.find((t) => t.id === activeProject.activeThemeId) ||
       COLOR_THEMES.find((t) => t.id === activeProject.activeThemeId) ||
       COLOR_THEMES[0]
     );
-  }, [activeProject.activeThemeId]);
+  }, [activeProject.activeThemeId, customThemes]);
+
 
   const currentFurniture = useMemo(() => {
     return furnitureMap[activeRoom.id] || [];
@@ -397,6 +403,35 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
     });
   };
 
+  const applyCustomPalette = (palette: ColorPalette, name = 'Custom Palette') => {
+    const newThemeId = `custom-theme-${Date.now()}`;
+    const newTheme: ColorTheme = {
+      id: newThemeId,
+      name,
+      subtitle: 'Bespoke Architectural Palette',
+      style: 'modern',
+      palette,
+      floorMaterial: 'light_oak',
+      wallFinish: 'matte',
+      aiRationale: 'Custom architectural color balance designed by user.',
+      recommendedLighting: 'Warm 2700K',
+      previewImage: '',
+    };
+
+    setCustomThemes((prev) => [newTheme, ...prev]);
+    setProjects((prev) =>
+      prev.map((p) => (p.id === activeProject.id ? { ...p, activeThemeId: newThemeId } : p))
+    );
+
+    confetti({
+      particleCount: 50,
+      spread: 70,
+      origin: { y: 0.8 },
+      colors: [palette.walls, palette.accent, palette.furniture, palette.curtains, palette.flooring],
+    });
+  };
+
+
   const applyLayout = (layout: GeneratedLayoutOption) => {
     setPreviousScore(layoutScore.overall);
     setPreviousClearance(layoutScore.minWalkingClearanceCm);
@@ -557,8 +592,11 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
         removeObstacle,
 
         applyTheme,
+        customThemes,
+        applyCustomPalette,
         applyLayout,
         optimizeConflictAutomatically,
+
         createProject,
         saveVersion,
         restoreVersion,
