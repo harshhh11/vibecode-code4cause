@@ -1,0 +1,147 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+
+  :root {
+    --font-sans: 'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'Space Grotesk', monospace;
+    --font-logo: 'Syne', 'Outfit', sans-serif;
+    
+    --bg-base: #FBFBF9;
+    --bg-surface: #FFFFFF;
+    --bg-muted: #F5F4EF;
+    --bg-accent: #EFECE6;
+    
+    --border-color: #E8E6DF;
+    --border-dark: #D4D0C5;
+    
+    --text-main: #171717;
+    --text-muted: #737373;
+    --text-light: #A3A3A3;
+    
+    --accent-bronze: #B26A4A;
+    --accent-walnut: #6E472A;
+    --accent-sage: #5E7260;
+    --accent-amber: #D97706;
+    --accent-green: #15803D;
+    --accent-red: #DC2626;
+  }
+
+  .dark {
+    --bg-base: #0D1117;
+    --bg-surface: #161B22;
+    --bg-muted: #21262D;
+    --bg-accent: #30363D;
+    
+    --border-color: #30363D;
+    --border-dark: #484F58;
+    
+    --text-main: #F0F6FC;
+    --text-muted: #8B949E;
+    --text-light: #6E7681;
+  }
+
+  * {
+    border-color: var(--border-color);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-base);
+    color: var(--text-main);
+    overflow-x: hidden;
+  }
+}
+
+/* Brand Typography */
+.font-logo {
+  font-family: var(--font-logo);
+  letter-spacing: 0.12em;
+  font-weight: 800;
+}
+
+/* Custom Architectural Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F5F4EF;
+}
+.dark ::-webkit-scrollbar-track {
+  background: #161B22;
+}
+::-webkit-scrollbar-thumb {
+  background: #D4D0C5;
+  border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #30363D;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A39E92;
+}
+
+/* Blueprint Grid Pattern */
+.bg-blueprint-grid {
+  background-size: 24px 24px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+}
+
+.dark .bg-blueprint-grid {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+}
+
+.bg-blueprint-grid-dense {
+  background-size: 12px 12px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+}
+
+/* Smooth glass effect */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(232, 230, 223, 0.9);
+}
+
+.glass-panel-dark {
+  background: rgba(22, 27, 34, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(48, 54, 61, 0.9);
+}
+
+/* Dimension redline styling */
+.dimension-callout {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+/* Subtle animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 16s linear infinite;
+}

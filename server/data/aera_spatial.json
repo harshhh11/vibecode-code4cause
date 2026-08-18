@@ -1,0 +1,850 @@
+{
+  "projects": [
+    {
+      "id": "proj-2bhk-alexander",
+      "name": "My 2BHK Apartment",
+      "description": "1200 sq.ft • Complete structural layout with optimal circulation and custom storage.",
+      "type": "home",
+      "total_area_sqft": 1200,
+      "config_type": "2BHK",
+      "active_room_id": "room-master-bed",
+      "active_theme_id": "theme-warm-minimal",
+      "layout_score": 91,
+      "versions": [
+        {
+          "id": "v-3",
+          "name": "Version 3 (Applied Designer Fix)",
+          "timestamp": "2 hours ago",
+          "layoutScore": 91
+        },
+        {
+          "id": "v-2",
+          "name": "Version 2 (AI Optimized)",
+          "timestamp": "1 day ago",
+          "layoutScore": 88
+        },
+        {
+          "id": "v-1",
+          "name": "Version 1 (Initial Setup)",
+          "timestamp": "3 days ago",
+          "layoutScore": 76
+        }
+      ],
+      "created_at": "2026-08-10",
+      "last_edited": "2 hours ago"
+    },
+    {
+      "id": "proj-master-suite",
+      "name": "Master Bedroom Studio",
+      "description": "350 sq.ft • Exploring custom wardrobe integrations and ergonomic desk placement.",
+      "type": "room",
+      "total_area_sqft": 168,
+      "config_type": null,
+      "active_room_id": "room-master-bed",
+      "active_theme_id": "theme-soft-contemporary",
+      "layout_score": 85,
+      "versions": [
+        {
+          "id": "v-1",
+          "name": "Initial Concept",
+          "timestamp": "1 day ago",
+          "layoutScore": 85
+        }
+      ],
+      "created_at": "2026-08-12",
+      "last_edited": "1 day ago"
+    },
+    {
+      "id": "proj-nordic-living",
+      "name": "Nordic Living Room",
+      "description": "480 sq.ft • Testing spatial flow with minimalist Scandinavian seating and concealed media wall.",
+      "type": "room",
+      "total_area_sqft": 224,
+      "config_type": null,
+      "active_room_id": "room-living",
+      "active_theme_id": "theme-scandinavian-breeze",
+      "layout_score": 78,
+      "versions": [],
+      "created_at": "2026-08-05",
+      "last_edited": "3 days ago"
+    }
+  ],
+  "rooms": [
+    {
+      "id": "room-master-bed",
+      "project_id": "proj-2bhk-alexander",
+      "name": "Master Bedroom",
+      "type": "master_bedroom",
+      "length_ft": 14,
+      "width_ft": 12,
+      "height_ft": 10,
+      "doors": [
+        {
+          "id": "door-mb-1",
+          "name": "Entry Door",
+          "wall": "south",
+          "offset": 2,
+          "width": 3,
+          "swing": "inside_left"
+        }
+      ],
+      "windows": [
+        {
+          "id": "win-mb-1",
+          "name": "North Window",
+          "wall": "north",
+          "offset": 4.5,
+          "width": 5,
+          "height": 5,
+          "sillHeight": 3
+        }
+      ],
+      "obstacles": [
+        {
+          "id": "col-1",
+          "name": "Corner Column",
+          "type": "column",
+          "x": 0,
+          "y": 0,
+          "width": 1.2,
+          "depth": 1.2
+        }
+      ],
+      "theme_id": "theme-warm-minimal"
+    },
+    {
+      "id": "room-living",
+      "project_id": "proj-2bhk-alexander",
+      "name": "Living Room",
+      "type": "living",
+      "length_ft": 16,
+      "width_ft": 14,
+      "height_ft": 10,
+      "doors": [
+        {
+          "id": "door-lv-1",
+          "name": "Main Foyer Door",
+          "wall": "west",
+          "offset": 2,
+          "width": 3.5,
+          "swing": "inside_left"
+        }
+      ],
+      "windows": [
+        {
+          "id": "win-lv-1",
+          "name": "Balcony Glass Slider",
+          "wall": "east",
+          "offset": 3,
+          "width": 8,
+          "height": 7,
+          "sillHeight": 0.5
+        }
+      ],
+      "obstacles": [],
+      "theme_id": "theme-warm-minimal"
+    },
+    {
+      "id": "room-bed-2",
+      "project_id": "proj-2bhk-alexander",
+      "name": "Bedroom 2 / Guest",
+      "type": "bedroom_2",
+      "length_ft": 12,
+      "width_ft": 11,
+      "height_ft": 10,
+      "doors": [
+        {
+          "id": "door-b2-1",
+          "name": "Door",
+          "wall": "south",
+          "offset": 1.5,
+          "width": 3,
+          "swing": "inside_left"
+        }
+      ],
+      "windows": [
+        {
+          "id": "win-b2-1",
+          "name": "Window",
+          "wall": "north",
+          "offset": 3,
+          "width": 4,
+          "height": 5,
+          "sillHeight": 3
+        }
+      ],
+      "obstacles": [],
+      "theme_id": null
+    },
+    {
+      "id": "room-kitchen",
+      "project_id": "proj-2bhk-alexander",
+      "name": "Kitchen",
+      "type": "kitchen",
+      "length_ft": 12,
+      "width_ft": 9,
+      "height_ft": 10,
+      "doors": [
+        {
+          "id": "door-k-1",
+          "name": "Archway",
+          "wall": "south",
+          "offset": 3,
+          "width": 3.5,
+          "swing": "inside_left"
+        }
+      ],
+      "windows": [
+        {
+          "id": "win-k-1",
+          "name": "Counter Window",
+          "wall": "north",
+          "offset": 4,
+          "width": 3.5,
+          "height": 3.5,
+          "sillHeight": 4
+        }
+      ],
+      "obstacles": [],
+      "theme_id": null
+    },
+    {
+      "id": "room-dining",
+      "project_id": "proj-2bhk-alexander",
+      "name": "Dining Area",
+      "type": "dining",
+      "length_ft": 10,
+      "width_ft": 9,
+      "height_ft": 10,
+      "doors": [],
+      "windows": [],
+      "obstacles": [],
+      "theme_id": null
+    },
+    {
+      "id": "room-balcony",
+      "project_id": "proj-2bhk-alexander",
+      "name": "Balcony",
+      "type": "balcony",
+      "length_ft": 10,
+      "width_ft": 5,
+      "height_ft": 10,
+      "doors": [],
+      "windows": [],
+      "obstacles": [],
+      "theme_id": null
+    },
+    {
+      "id": "room-master-bed",
+      "project_id": "proj-master-suite",
+      "name": "Master Bedroom",
+      "type": "master_bedroom",
+      "length_ft": 14,
+      "width_ft": 12,
+      "height_ft": 10,
+      "doors": [
+        {
+          "id": "door-mb-1",
+          "name": "Entry Door",
+          "wall": "south",
+          "offset": 2,
+          "width": 3,
+          "swing": "inside_left"
+        }
+      ],
+      "windows": [
+        {
+          "id": "win-mb-1",
+          "name": "Window",
+          "wall": "north",
+          "offset": 4.5,
+          "width": 5,
+          "height": 5,
+          "sillHeight": 3
+        }
+      ],
+      "obstacles": [],
+      "theme_id": null
+    }
+  ],
+  "furniture_items": [
+    {
+      "id": "f-bed-1",
+      "room_id": "room-master-bed",
+      "name": "Queen Bed",
+      "category": "bedroom",
+      "width_ft": 5.5,
+      "depth_ft": 6.5,
+      "height_ft": 3.2,
+      "pos_x": 4.2,
+      "pos_y": 1,
+      "rotation_deg": 0,
+      "is_existing": 1,
+      "color": "#E6DFD5",
+      "material": "linen_oak",
+      "model_type": "bed_queen"
+    },
+    {
+      "id": "f-nightstand-left",
+      "room_id": "room-master-bed",
+      "name": "Side Table (Left)",
+      "category": "bedroom",
+      "width_ft": 1.8,
+      "depth_ft": 1.6,
+      "height_ft": 1.8,
+      "pos_x": 2,
+      "pos_y": 1,
+      "rotation_deg": 0,
+      "is_existing": 0,
+      "color": "#8C6847",
+      "material": "walnut",
+      "model_type": "nightstand"
+    },
+    {
+      "id": "f-nightstand-right",
+      "room_id": "room-master-bed",
+      "name": "Side Table (Right)",
+      "category": "bedroom",
+      "width_ft": 1.8,
+      "depth_ft": 1.6,
+      "height_ft": 1.8,
+      "pos_x": 10.2,
+      "pos_y": 1,
+      "rotation_deg": 0,
+      "is_existing": 0,
+      "color": "#8C6847",
+      "material": "walnut",
+      "model_type": "nightstand"
+    },
+    {
+      "id": "f-wardrobe-1",
+      "room_id": "room-master-bed",
+      "name": "4-Door Wardrobe",
+      "category": "storage",
+      "width_ft": 6,
+      "depth_ft": 2,
+      "height_ft": 7.2,
+      "pos_x": 1,
+      "pos_y": 5,
+      "rotation_deg": 90,
+      "is_existing": 0,
+      "color": "#6E472A",
+      "material": "fluted_oak",
+      "model_type": "wardrobe"
+    },
+    {
+      "id": "f-study-desk",
+      "room_id": "room-master-bed",
+      "name": "Architectural Study Table",
+      "category": "office",
+      "width_ft": 4.5,
+      "depth_ft": 2.2,
+      "height_ft": 2.5,
+      "pos_x": 8.5,
+      "pos_y": 8,
+      "rotation_deg": 0,
+      "is_existing": 1,
+      "color": "#7A5B40",
+      "material": "solid_wood",
+      "model_type": "study_desk"
+    },
+    {
+      "id": "f-office-chair",
+      "room_id": "room-master-bed",
+      "name": "Desk Chair",
+      "category": "office",
+      "width_ft": 2,
+      "depth_ft": 2,
+      "height_ft": 3,
+      "pos_x": 9.7,
+      "pos_y": 9.5,
+      "rotation_deg": 180,
+      "is_existing": 0,
+      "color": "#2B2B2B",
+      "material": "mesh_black",
+      "model_type": "office_chair"
+    },
+    {
+      "id": "f-sofa-main",
+      "room_id": "room-living",
+      "name": "3-Seater Sofa",
+      "category": "living",
+      "width_ft": 7,
+      "depth_ft": 3.2,
+      "height_ft": 2.8,
+      "pos_x": 2,
+      "pos_y": 3,
+      "rotation_deg": 90,
+      "is_existing": 0,
+      "color": "#C4BCB1",
+      "material": "boucle_oatmeal",
+      "model_type": "sofa_3"
+    },
+    {
+      "id": "f-coffee-table",
+      "room_id": "room-living",
+      "name": "Organic Coffee Table",
+      "category": "living",
+      "width_ft": 4,
+      "depth_ft": 2.2,
+      "height_ft": 1.4,
+      "pos_x": 6.5,
+      "pos_y": 5,
+      "rotation_deg": 0,
+      "is_existing": 0,
+      "color": "#8C6847",
+      "material": "travertine",
+      "model_type": "coffee_table"
+    },
+    {
+      "id": "f-tv-console",
+      "room_id": "room-living",
+      "name": "TV Media Console",
+      "category": "living",
+      "width_ft": 6.5,
+      "depth_ft": 1.5,
+      "height_ft": 1.8,
+      "pos_x": 13,
+      "pos_y": 3.5,
+      "rotation_deg": 270,
+      "is_existing": 0,
+      "color": "#3E3129",
+      "material": "smoked_oak",
+      "model_type": "tv_unit"
+    },
+    {
+      "id": "f-bed-1",
+      "room_id": "room-master-bed",
+      "name": "Queen Bed",
+      "category": "bedroom",
+      "width_ft": 5.5,
+      "depth_ft": 6.5,
+      "height_ft": 3.2,
+      "pos_x": 4.2,
+      "pos_y": 1,
+      "rotation_deg": 0,
+      "is_existing": 1,
+      "color": "#E6DFD5",
+      "material": "linen_oak",
+      "model_type": "bed_queen"
+    },
+    {
+      "id": "f-nightstand-left",
+      "room_id": "room-master-bed",
+      "name": "Side Table (Left)",
+      "category": "bedroom",
+      "width_ft": 1.8,
+      "depth_ft": 1.6,
+      "height_ft": 1.8,
+      "pos_x": 2,
+      "pos_y": 1,
+      "rotation_deg": 0,
+      "is_existing": 0,
+      "color": "#8C6847",
+      "material": "walnut",
+      "model_type": "nightstand"
+    },
+    {
+      "id": "f-nightstand-right",
+      "room_id": "room-master-bed",
+      "name": "Side Table (Right)",
+      "category": "bedroom",
+      "width_ft": 1.8,
+      "depth_ft": 1.6,
+      "height_ft": 1.8,
+      "pos_x": 10.2,
+      "pos_y": 1,
+      "rotation_deg": 0,
+      "is_existing": 0,
+      "color": "#8C6847",
+      "material": "walnut",
+      "model_type": "nightstand"
+    },
+    {
+      "id": "f-wardrobe-1",
+      "room_id": "room-master-bed",
+      "name": "4-Door Wardrobe",
+      "category": "storage",
+      "width_ft": 6,
+      "depth_ft": 2,
+      "height_ft": 7.2,
+      "pos_x": 1,
+      "pos_y": 5,
+      "rotation_deg": 90,
+      "is_existing": 0,
+      "color": "#6E472A",
+      "material": "fluted_oak",
+      "model_type": "wardrobe"
+    },
+    {
+      "id": "f-study-desk",
+      "room_id": "room-master-bed",
+      "name": "Architectural Study Table",
+      "category": "office",
+      "width_ft": 4.5,
+      "depth_ft": 2.2,
+      "height_ft": 2.5,
+      "pos_x": 8.5,
+      "pos_y": 8,
+      "rotation_deg": 0,
+      "is_existing": 1,
+      "color": "#7A5B40",
+      "material": "solid_wood",
+      "model_type": "study_desk"
+    },
+    {
+      "id": "f-office-chair",
+      "room_id": "room-master-bed",
+      "name": "Desk Chair",
+      "category": "office",
+      "width_ft": 2,
+      "depth_ft": 2,
+      "height_ft": 3,
+      "pos_x": 9.7,
+      "pos_y": 9.5,
+      "rotation_deg": 180,
+      "is_existing": 0,
+      "color": "#2B2B2B",
+      "material": "mesh_black",
+      "model_type": "office_chair"
+    }
+  ],
+  "designers": [
+    {
+      "id": "des-ethan-rodrigues",
+      "name": "Ethan Rodrigues",
+      "title": "Principal Architect & Spatial Designer",
+      "bio": "Specializing in maximizing usable square footage in urban high-rises. Over 9 years transforming residential spaces through precise structural clearance planning and bespoke millwork.",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
+      "rating": 4.9,
+      "reviews_count": 128,
+      "experience_years": 9,
+      "hourly_rate": 85,
+      "rate_per_sqft": 15,
+      "location": "San Francisco, CA / Remote",
+      "verified": 1,
+      "response_time": "< 2 hours",
+      "styles": [
+        "Modern",
+        "Luxury",
+        "Warm Minimal"
+      ],
+      "specialization": [
+        "Apartment Spatial Optimization",
+        "Modern Luxury Interiors",
+        "Custom Storage Planning"
+      ],
+      "portfolio": [
+        {
+          "id": "port-1",
+          "title": "Tribeca Penthouse Loft",
+          "category": "Whole Home",
+          "roomType": "living",
+          "imageUrl": "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80",
+          "description": "Transformed an awkward 1,400 sq.ft floorplan into an airy 3-bedroom layout with seamless concealed storage."
+        },
+        {
+          "id": "port-2",
+          "title": "Nordic Oak Master Bedroom",
+          "category": "Bedroom",
+          "roomType": "master_bedroom",
+          "imageUrl": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=80",
+          "description": "Custom headboard millwork with integrated bedside floating consoles and 92cm walking corridors."
+        }
+      ],
+      "reviews": [
+        {
+          "id": "rev-1",
+          "userName": "Elena Rostova",
+          "userAvatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&q=80",
+          "rating": 5,
+          "date": "2 weeks ago",
+          "comment": "Ethan caught a major door clearance bottleneck in our master bedroom before we ordered furniture. Saved us thousands!",
+          "projectType": "2BHK Apartment"
+        },
+        {
+          "id": "rev-2",
+          "userName": "David Miller",
+          "userAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80",
+          "rating": 5,
+          "date": "1 month ago",
+          "comment": "Communicating inside AERA without having to email blueprints back and forth made the design process so fast.",
+          "projectType": "Master Bedroom"
+        }
+      ]
+    },
+    {
+      "id": "des-meera-shah",
+      "name": "Meera Shah",
+      "title": "Senior Spatial Planner & Biophilic Designer",
+      "bio": "Passionate about turning compact urban apartments into serene, highly functional sanctuaries. Expert in Japandi spatial aesthetics and ergonomic circulation.",
+      "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80",
+      "rating": 4.8,
+      "reviews_count": 96,
+      "experience_years": 6,
+      "hourly_rate": 70,
+      "rate_per_sqft": 12,
+      "location": "Austin, TX / Remote",
+      "verified": 1,
+      "response_time": "< 1 hour",
+      "styles": [
+        "Minimal",
+        "Scandinavian",
+        "Japandi"
+      ],
+      "specialization": [
+        "Minimalist & Scandinavian Design",
+        "Small Space Engineering",
+        "Color Harmonization"
+      ],
+      "portfolio": [
+        {
+          "id": "port-3",
+          "title": "Cedarwood Japandi Retreat",
+          "category": "Master Bedroom",
+          "roomType": "master_bedroom",
+          "imageUrl": "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80",
+          "description": "Low-profile platform bed with tatami mat accents and concealed wardrobe illumination."
+        }
+      ],
+      "reviews": [
+        {
+          "id": "rev-3",
+          "userName": "Marcus Vance",
+          "userAvatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80",
+          "rating": 5,
+          "date": "3 weeks ago",
+          "comment": "Meera optimized our 1200 sq.ft 2BHK layout and increased our usable floor area by 18%. Incredible eye for detail!",
+          "projectType": "2BHK Whole Home"
+        }
+      ]
+    },
+    {
+      "id": "des-julian-vance",
+      "name": "Julian Vance",
+      "title": "Architectural Consultant & 3D Spatial Artist",
+      "bio": "Former architectural firm lead specializing in structural renovations, open layouts, and custom millwork detailing.",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
+      "rating": 4.95,
+      "reviews_count": 114,
+      "experience_years": 12,
+      "hourly_rate": 95,
+      "rate_per_sqft": 18,
+      "location": "Chicago, IL / Remote",
+      "verified": 1,
+      "response_time": "< 3 hours",
+      "styles": [
+        "Industrial",
+        "Modern",
+        "Luxury"
+      ],
+      "specialization": [
+        "Whole Home Renovations",
+        "Industrial & Contemporary Loft Design",
+        "Acoustic & Lighting Design"
+      ],
+      "portfolio": [
+        {
+          "id": "port-4",
+          "title": "Foundry Loft Living & Studio",
+          "category": "Living Room",
+          "roomType": "living",
+          "imageUrl": "https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=800&q=80",
+          "description": "Exposed brick & concrete loft with defined acoustic zones and steel-frame glass partitions."
+        }
+      ],
+      "reviews": [
+        {
+          "id": "rev-4",
+          "userName": "Sarah Jenkins",
+          "userAvatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80",
+          "rating": 5,
+          "date": "2 months ago",
+          "comment": "The 3D walkthrough Julian delivered within the AERA chat gave us the exact confidence we needed for our renovation contractor.",
+          "projectType": "Living & Dining Overhaul"
+        }
+      ]
+    }
+  ],
+  "consultations": [
+    {
+      "id": "consult-alexander-ethan-1",
+      "user_id": "user-alexander",
+      "designer_id": "des-ethan-rodrigues",
+      "project_id": "proj-2bhk-alexander",
+      "topic": "Wardrobe Clearance & Circulation Optimization",
+      "status": "accepted",
+      "budget_range": "$2,000 - $5,000",
+      "created_at": "2 hours ago"
+    }
+  ],
+  "messages": [
+    {
+      "id": "msg-1",
+      "consultation_id": "consult-alexander-ethan-1",
+      "sender_id": "user-alexander",
+      "sender_name": "Alexander Wright",
+      "sender_role": "user",
+      "sender_avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80",
+      "timestamp": "10:30 AM",
+      "text": "Hi Ethan! I shared my Master Bedroom blueprint. We want to place an 8ft wardrobe, but AERA gave us a ⚠️ Dimension Warning saying the central walking aisle drops to 48 cm.",
+      "layout_attachment": null
+    },
+    {
+      "id": "msg-2",
+      "consultation_id": "consult-alexander-ethan-1",
+      "sender_id": "des-ethan-rodrigues",
+      "sender_name": "Ethan Rodrigues",
+      "sender_role": "designer",
+      "sender_avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80",
+      "timestamp": "10:38 AM",
+      "text": "Hi Alexander! I inspected your 12×14 ft floor plan. The issue is that the wardrobe was positioned perpendicular to the door swing path. I adjusted the layout by rotating the wardrobe 90° along the solid north alcove. This restores a full 92 cm circulation corridor without blocking natural daylight.",
+      "layout_attachment": {
+        "layoutId": "layout-opt-a",
+        "title": "Architectural Revision (92 cm Corridor)",
+        "score": 91,
+        "description": "Wardrobe shifted to north wall; Queen bed centered on structural axis with dual 2ft nightstands.",
+        "applied": false,
+        "layoutData": {
+          "id": "layout-opt-a",
+          "name": "Layout A — Space Efficient",
+          "focus": "space_efficient",
+          "focusLabel": "Space Efficient",
+          "score": {
+            "overall": 90,
+            "grade": "Fair",
+            "breakdown": {
+              "spaceUtilization": 95,
+              "movement": 94,
+              "furnitureFit": 25,
+              "naturalLight": 90,
+              "doorClearance": 66,
+              "storage": 92,
+              "overallBalance": 76
+            },
+            "rationale": "Detected 6 spatial conflicts: furniture overlap. Optimizing positions will increase overall movement score.",
+            "usableAreaSqFt": 101,
+            "totalAreaSqFt": 168,
+            "minWalkingClearanceCm": 107
+          },
+          "furniture": [
+            {
+              "id": "f-bed-1",
+              "name": "Queen Bed",
+              "category": "bedroom",
+              "width": 5.5,
+              "depth": 6.5,
+              "height": 3.2,
+              "x": 4.25,
+              "y": 1,
+              "rotation": 0,
+              "isExisting": true,
+              "color": "#E6DFD5",
+              "material": "linen_oak",
+              "modelType": "bed_queen"
+            },
+            {
+              "id": "f-nightstand-left",
+              "name": "Side Table (Left)",
+              "category": "bedroom",
+              "width": 1.8,
+              "depth": 1.6,
+              "height": 1.8,
+              "x": 6.1,
+              "y": 1,
+              "rotation": 0,
+              "isExisting": false,
+              "color": "#8C6847",
+              "material": "walnut",
+              "modelType": "nightstand"
+            },
+            {
+              "id": "f-nightstand-right",
+              "name": "Side Table (Right)",
+              "category": "bedroom",
+              "width": 1.8,
+              "depth": 1.6,
+              "height": 1.8,
+              "x": 6.1,
+              "y": 1,
+              "rotation": 0,
+              "isExisting": false,
+              "color": "#8C6847",
+              "material": "walnut",
+              "modelType": "nightstand"
+            },
+            {
+              "id": "f-wardrobe-1",
+              "name": "4-Door Wardrobe",
+              "category": "storage",
+              "width": 6,
+              "depth": 2,
+              "height": 7.2,
+              "x": 1,
+              "y": 4,
+              "rotation": 90,
+              "isExisting": false,
+              "color": "#6E472A",
+              "material": "fluted_oak",
+              "modelType": "wardrobe"
+            },
+            {
+              "id": "f-study-desk",
+              "name": "Architectural Study Table",
+              "category": "office",
+              "width": 4.5,
+              "depth": 2.2,
+              "height": 2.5,
+              "x": 8.5,
+              "y": 4,
+              "rotation": 0,
+              "isExisting": true,
+              "color": "#7A5B40",
+              "material": "solid_wood",
+              "modelType": "study_desk"
+            },
+            {
+              "id": "f-office-chair",
+              "name": "Desk Chair",
+              "category": "office",
+              "width": 2,
+              "depth": 2,
+              "height": 3,
+              "x": 11,
+              "y": 4,
+              "rotation": 0,
+              "isExisting": false,
+              "color": "#2B2B2B",
+              "material": "mesh_black",
+              "modelType": "office_chair"
+            }
+          ],
+          "strengths": [
+            "Maximizes 92 cm central walking corridor",
+            "Direct unobstructed view from entrance",
+            "Bed placed on primary structural wall with perimeter lighting"
+          ],
+          "warnings": [
+            "Furniture Overlap",
+            "Furniture Overlap",
+            "Furniture Overlap",
+            "Furniture Overlap",
+            "Door Swing Blocked",
+            "Furniture Overlap"
+          ]
+        }
+      }
+    },
+    {
+      "id": "msg-3",
+      "consultation_id": "consult-alexander-ethan-1",
+      "sender_id": "des-ethan-rodrigues",
+      "sender_name": "Ethan Rodrigues",
+      "sender_role": "designer",
+      "sender_avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80",
+      "timestamp": "10:40 AM",
+      "text": "Click \"Apply Revision to Blueprint\" on the card above to immediately update your 2D CAD and 3D studio scene!",
+      "layout_attachment": null
+    }
+  ]
+}
