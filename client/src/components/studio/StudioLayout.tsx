@@ -62,9 +62,13 @@ export const StudioLayout: React.FC = () => {
         {/* Real-time ⚠️ Dimension Alert Banner */}
         {!is360ImmersiveView && <DimensionAlertBanner />}
 
+
         {/* Dynamic Studio Canvas & Floating Edge Toggles */}
         <div className="flex-1 relative overflow-hidden">
-          {studioMode === '2d' && !is360ImmersiveView ? <Canvas2D /> : <Viewport3D />}
+          {studioMode === '2d' ? <Canvas2D /> : <Viewport3D />}
+
+
+
 
           {/* Left Sidebar Collapse / Expand Toggle Button */}
           {!is360ImmersiveView && (

@@ -104,12 +104,22 @@ const UIContext = createContext<UIContextType | undefined>(undefined);
 
 export const UIProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentView, setCurrentView] = useState<AppView>('landing');
-  const [studioMode, setStudioMode] = useState<StudioViewMode>('2d');
+  const [studioMode, setStudioModeState] = useState<StudioViewMode>('2d');
+
   const [camera3DPreset, setCamera3DPreset] = useState<Camera3DPreset>('isometric');
   const [isWholeHome3D, setIsWholeHome3D] = useState<boolean>(false);
   const [is360ImmersiveView, setIs360ImmersiveView] = useState<boolean>(false);
   const [isAutoTour, setIsAutoTour] = useState<boolean>(false);
   const [showWalkingPaths, setShowWalkingPaths] = useState<boolean>(true);
+
+  const setStudioMode = (mode: StudioViewMode) => {
+    setStudioModeState(mode);
+    if (mode === '2d') {
+      setIs360ImmersiveView(false);
+      setIsAutoTour(false);
+    }
+  };
+
 
   const [leftSidebarCollapsed, setLeftSidebarCollapsed] = useState<boolean>(false);
   const [rightSidebarCollapsed, setRightSidebarCollapsed] = useState<boolean>(false);
