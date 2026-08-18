@@ -39,8 +39,9 @@ export const UserDashboard: React.FC = () => {
         <div className="space-y-1.5">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-white dark:bg-[#21262D] border border-[#E5D4C4] dark:border-[#523E28] rounded-full text-xs font-extrabold text-[#8C5232] dark:text-[#D4AF37] uppercase tracking-wider shadow-2xs">
             <Award className="w-3.5 h-3.5 text-[#D4AF37]" />
-            <span>Final 12 Judging Edition • AERA Studio</span>
+            <span>AI Spatial Intelligence • AERA Studio</span>
           </div>
+
           <h1 className="text-2xl sm:text-3xl font-black text-neutral-950 dark:text-white tracking-tight">
             Welcome back, {user.name}
           </h1>

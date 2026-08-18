@@ -37,8 +37,9 @@ export const LandingPage: React.FC = () => {
                 AERA
               </span>
               <span className="text-[9px] font-mono font-black bg-[#FAF4ED] dark:bg-[#282115] text-[#8C5232] dark:text-[#D4AF37] px-2 py-0.5 rounded-full border border-[#E5D4C4] dark:border-[#523E28] uppercase tracking-wider">
-                Final 12 Edition
+                Studio Edition
               </span>
+
             </div>
             <span className="text-[10px] block text-neutral-500 dark:text-neutral-400 font-medium tracking-tight -mt-0.5">
               Autonomous Spatial Intelligence Platform
@@ -79,11 +80,12 @@ export const LandingPage: React.FC = () => {
 
       {/* Hero Section */}
       <section className="pt-16 pb-20 px-6 lg:px-12 max-w-7xl mx-auto flex flex-col items-center text-center space-y-8">
-        {/* Finalist Ribbon */}
+        {/* Feature Ribbon */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-linear-to-r from-amber-500/10 via-amber-500/20 to-amber-500/10 dark:from-amber-400/10 dark:via-amber-400/20 dark:to-amber-400/10 border border-amber-500/30 text-[#8C5232] dark:text-[#D4AF37] text-xs font-extrabold uppercase tracking-wider animate-fadeIn shadow-xs">
           <Award className="w-3.5 h-3.5 text-[#D4AF37]" />
-          <span>Final 12 Finalist • Next-Gen Deterministic CAD Math & 3D WebGL</span>
+          <span>Next-Gen Deterministic CAD Math & Procedural 3D WebGL</span>
         </div>
+
 
         <div className="space-y-4 max-w-3xl">
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-neutral-950 dark:text-white tracking-tight leading-[1.08]">
@@ -358,10 +360,11 @@ export const LandingPage: React.FC = () => {
       {/* Footer */}
       <footer className="mt-auto py-8 border-t border-[#EAE6DD] dark:border-[#21262D] text-center text-xs text-neutral-500 dark:text-neutral-400 bg-white dark:bg-[#0A0D12]">
         <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <span className="font-extrabold text-neutral-900 dark:text-white">AERA Spatial Intelligence • Final 12 Edition</span>
+          <span className="font-extrabold text-neutral-900 dark:text-white">AERA Spatial Intelligence System</span>
           <p>© 2026 AERA Design Inc. Built for deterministic architectural accuracy.</p>
         </div>
       </footer>
+
     </div>
   );
 };
