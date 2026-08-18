@@ -22,16 +22,22 @@ export const Canvas2D: React.FC = () => {
     setSelectedFurnitureId,
     selectedDoorId,
     setSelectedDoorId,
+    selectedWindowId,
+    setSelectedWindowId,
     updateFurniture,
     removeFurniture,
     duplicateFurniture,
     updateDoor,
     removeDoor,
     addDoor,
+    addWindow,
+    updateWindow,
+    removeWindow,
     conflicts,
     walkingPaths,
     activeTheme,
   } = useProject();
+
 
   const { showWalkingPaths } = useUI();
 
@@ -467,6 +473,77 @@ export const Canvas2D: React.FC = () => {
           );
         })}
 
+        {/* ------------------------------------------------------------- */}
+        {/* ARCHITECTURAL WINDOW OPENINGS (CYAN SLABS) */}
+        {/* ------------------------------------------------------------- */}
+        {(activeRoom.windows || []).map((win) => {
+          const isWinSelected = win.id === selectedWindowId;
+          const winWidthPx = win.width * scale;
+
+          let winStyle: React.CSSProperties = {};
+          if (win.wall === 'north') {
+            winStyle = { top: -7, left: `${win.offset * scale}px`, width: `${winWidthPx}px`, height: 14 };
+          } else if (win.wall === 'south') {
+            winStyle = { bottom: -7, left: `${win.offset * scale}px`, width: `${winWidthPx}px`, height: 14 };
+          } else if (win.wall === 'west') {
+            winStyle = { left: -7, top: `${win.offset * scale}px`, height: `${winWidthPx}px`, width: 14 };
+          } else {
+            winStyle = { right: -7, top: `${win.offset * scale}px`, height: `${winWidthPx}px`, width: 14 };
+          }
+
+          return (
+            <div
+              key={win.id}
+              style={winStyle}
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedFurnitureId(null);
+                setSelectedDoorId(null);
+                setSelectedWindowId(win.id);
+              }}
+              className={`absolute z-20 cursor-pointer flex items-center justify-center transition-all ${
+                isWinSelected
+                  ? 'bg-sky-400 border-2 border-sky-600 shadow-lg ring-2 ring-sky-400/50'
+                  : 'bg-sky-500 hover:bg-sky-400 border-2 border-neutral-900 shadow-xs'
+              }`}
+              title={`Window (${win.width}' on ${win.wall.toUpperCase()} wall)`}
+            >
+              <span className="text-[8px] font-bold text-neutral-950 truncate px-0.5">
+                🪟 {win.width}'
+              </span>
+
+              {isWinSelected && (
+                <div
+                  onClick={(e) => e.stopPropagation()}
+                  className="absolute -top-11 left-1/2 -translate-x-1/2 bg-neutral-950 text-white rounded-xl shadow-2xl p-1 flex items-center gap-1.5 z-40 pointer-events-auto text-[11px] whitespace-nowrap"
+                >
+                  <span className="text-[10px] font-bold text-sky-400 px-1">
+                    {win.wall.toUpperCase()} WALL
+                  </span>
+                  <button
+                    onClick={() => {
+                      const walls: WallSide[] = ['north', 'east', 'south', 'west'];
+                      const nextIdx = (walls.indexOf(win.wall) + 1) % 4;
+                      updateWindow(win.id, { wall: walls[nextIdx], offset: 2.0 });
+                    }}
+                    className="px-2 py-0.5 bg-neutral-800 hover:bg-neutral-700 text-neutral-200 rounded font-bold"
+                  >
+                    Flip Wall
+                  </button>
+                  <button
+                    onClick={() => removeWindow(win.id)}
+                    className="p-1 hover:bg-red-900 rounded text-red-400"
+                    title="Delete Window"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              )}
+            </div>
+          );
+        })}
+
+
         {/* Structural Obstacles / Columns */}
         {activeRoom.obstacles.map((obs) => (
           <div
@@ -605,6 +682,8 @@ export const Canvas2D: React.FC = () => {
       <div className="absolute bottom-5 left-5 bg-white/95 dark:bg-[#161B22]/95 backdrop-blur-md px-4 py-2 rounded-2xl border border-[#E8E6DF] dark:border-[#30363D] shadow-md flex items-center gap-3 text-xs font-mono text-neutral-700 dark:text-neutral-200 z-30 pointer-events-auto">
         <button
           onClick={() => {
+            setSelectedFurnitureId(null);
+            setSelectedWindowId(null);
             addDoor({
               name: 'Entry Door',
               wall: 'south',
@@ -613,13 +692,33 @@ export const Canvas2D: React.FC = () => {
               swing: 'inside_left',
             });
           }}
-          className="px-2.5 py-1 bg-neutral-900 hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-200 text-white dark:text-neutral-950 rounded-lg text-xs font-bold font-sans flex items-center gap-1"
+          className="px-2.5 py-1 bg-neutral-900 hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-200 text-white dark:text-neutral-950 rounded-lg text-xs font-bold font-sans flex items-center gap-1 transition-all active:scale-95"
         >
           <Plus className="w-3.5 h-3.5 text-[#D4B996] dark:text-[#8C5232]" />
           <span>+ Add Door</span>
         </button>
 
+        <button
+          onClick={() => {
+            setSelectedFurnitureId(null);
+            setSelectedDoorId(null);
+            addWindow({
+              name: 'Window',
+              wall: 'north',
+              offset: 3.5,
+              width: 4.0,
+              height: 4.0,
+              sillHeight: 3.0,
+            });
+          }}
+          className="px-2.5 py-1 bg-sky-600 hover:bg-sky-500 dark:bg-sky-700 dark:hover:bg-sky-600 text-white rounded-lg text-xs font-bold font-sans flex items-center gap-1 transition-all active:scale-95 shadow-xs"
+        >
+          <Plus className="w-3.5 h-3.5" />
+          <span>+ Add Window</span>
+        </button>
+
         <span className="text-neutral-300 dark:text-neutral-700">|</span>
+
 
         {/* Magnetic Wall Snap Toggle */}
         <button

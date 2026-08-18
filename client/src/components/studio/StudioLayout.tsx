@@ -5,8 +5,8 @@ import { LeftSidebar } from './LeftSidebar';
 import { Canvas2D } from './Canvas2D';
 import { Viewport3D } from './Viewport3D';
 import { DimensionAlertBanner } from './DimensionAlertBanner';
-import { WhatIfWidget } from './WhatIfWidget';
 import { PropertiesPanel } from '../panels/PropertiesPanel';
+
 import { LayoutScorePanel } from '../panels/LayoutScorePanel';
 import { ColorThemePanel } from '../panels/ColorThemePanel';
 import { WalkingPathPanel } from '../panels/WalkingPathPanel';
@@ -121,11 +121,10 @@ export const StudioLayout: React.FC = () => {
               )}
             </button>
           )}
-
-          {/* Live What-If Analysis Comparison Widget */}
-          {!is360ImmersiveView && <WhatIfWidget />}
         </div>
       </main>
+
+
 
       {/* Right Sidebar: Multi-Tab Inspector (hidden in 360 mode or when collapsed) */}
       {!is360ImmersiveView && !rightSidebarCollapsed && (

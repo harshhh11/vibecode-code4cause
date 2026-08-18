@@ -19,10 +19,14 @@ export const PropertiesPanel: React.FC = () => {
     selectedDoorId,
     updateDoor,
     removeDoor,
+    selectedWindowId,
+    updateWindow,
+    removeWindow,
   } = useProject();
 
   const selectedItem = furniture.find((f) => f.id === selectedFurnitureId);
   const selectedDoor = activeRoom.doors.find((d) => d.id === selectedDoorId);
+  const selectedWindow = activeRoom.windows?.find((w) => w.id === selectedWindowId);
 
   // 1. DOOR SELECTED INSPECTOR
   if (selectedDoor) {
@@ -33,7 +37,7 @@ export const PropertiesPanel: React.FC = () => {
       <div className="p-4 space-y-5 select-none animate-fadeIn font-sans transition-colors duration-200">
         <div className="space-y-1 border-b border-[#E8E6DF] dark:border-[#30363D] pb-3">
           <span className="text-[10px] font-bold uppercase tracking-wider text-[#B26A4A] dark:text-[#D4AF37]">
-            Architectural Opening
+            Architectural Door Opening
           </span>
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-extrabold text-neutral-900 dark:text-white">{selectedDoor.name}</h3>
@@ -134,7 +138,93 @@ export const PropertiesPanel: React.FC = () => {
     );
   }
 
-  // 2. NO SELECTION FALLBACK
+  // 2. WINDOW SELECTED INSPECTOR
+  if (selectedWindow) {
+    const isHorizontal = selectedWindow.wall === 'north' || selectedWindow.wall === 'south';
+    const wallLength = isHorizontal ? activeRoom.dimensions.length : activeRoom.dimensions.width;
+
+    return (
+      <div className="p-4 space-y-5 select-none animate-fadeIn font-sans transition-colors duration-200">
+        <div className="space-y-1 border-b border-[#E8E6DF] dark:border-[#30363D] pb-3">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">
+            Architectural Window Opening
+          </span>
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-extrabold text-neutral-900 dark:text-white">{selectedWindow.name}</h3>
+            <button
+              onClick={() => removeWindow(selectedWindow.id)}
+              className="p-1 text-red-500 hover:bg-red-50 dark:hover:bg-red-950/60 rounded-lg transition-colors"
+              title="Delete Window"
+            >
+              <Trash2 className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        </div>
+
+        {/* Wall Selection */}
+        <div className="space-y-2">
+          <label className="text-[11px] font-bold text-neutral-700 dark:text-neutral-300 block">Wall Location</label>
+          <div className="grid grid-cols-4 gap-1.5">
+            {(['north', 'east', 'south', 'west'] as WallSide[]).map((w) => (
+              <button
+                key={w}
+                onClick={() => updateWindow(selectedWindow.id, { wall: w, offset: 2.0 })}
+                className={`py-1.5 px-2 rounded-xl text-xs font-bold capitalize transition-all ${
+                  selectedWindow.wall === w
+                    ? 'bg-sky-600 text-white shadow-xs'
+                    : 'bg-[#F5F4EF] dark:bg-[#21262D] hover:bg-[#EAE6DD] dark:hover:bg-[#30363D] text-neutral-700 dark:text-neutral-300'
+                }`}
+              >
+                {w}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Wall Offset Slider */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between text-[11px]">
+            <span className="font-bold text-neutral-700 dark:text-neutral-300">Offset Along Wall</span>
+            <span className="font-mono font-bold text-sky-700 dark:text-sky-300 bg-sky-50 dark:bg-sky-950 px-2 py-0.5 rounded border border-sky-200 dark:border-sky-800">
+              {selectedWindow.offset} ft ({ (selectedWindow.offset * 0.3048).toFixed(2) } m)
+            </span>
+          </div>
+          <input
+            type="range"
+            min="0.5"
+            max={Math.max(1, wallLength - selectedWindow.width - 0.5)}
+            step="0.25"
+            value={selectedWindow.offset}
+            onChange={(e) => updateWindow(selectedWindow.id, { offset: Number(e.target.value) })}
+            className="w-full accent-sky-500 cursor-pointer"
+          />
+        </div>
+
+        {/* Window Width */}
+        <div className="space-y-2">
+          <label className="text-[11px] font-bold text-neutral-700 dark:text-neutral-300 block">Window Width</label>
+          <div className="grid grid-cols-4 gap-1.5">
+            {[3.0, 4.0, 5.0, 6.0].map((widthVal) => (
+              <button
+                key={widthVal}
+                onClick={() => updateWindow(selectedWindow.id, { width: widthVal })}
+                className={`py-1.5 px-2 rounded-xl text-xs font-mono font-bold transition-all ${
+                  selectedWindow.width === widthVal
+                    ? 'bg-sky-500 text-white shadow-xs'
+                    : 'bg-[#F5F4EF] dark:bg-[#21262D] hover:bg-[#EAE6DD] dark:hover:bg-[#30363D] text-neutral-700 dark:text-neutral-300'
+                }`}
+              >
+                {widthVal}'
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 3. NO SELECTION FALLBACK
+
   if (!selectedItem) {
     return (
       <div className="p-6 text-center text-neutral-400 space-y-3 font-sans transition-colors duration-200">

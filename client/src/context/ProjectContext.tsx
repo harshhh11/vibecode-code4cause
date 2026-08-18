@@ -44,6 +44,8 @@ interface ProjectContextType {
   selectRoom: (roomId: string) => void;
   setSelectedFurnitureId: (id: string | null) => void;
   setSelectedDoorId: (id: string | null) => void;
+  selectedWindowId: string | null;
+  setSelectedWindowId: (id: string | null) => void;
 
   addFurniture: (item: Omit<FurnitureItem, 'id'>) => void;
   updateFurniture: (id: string, updates: Partial<FurnitureItem>) => void;
@@ -86,6 +88,8 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   const [selectedFurnitureId, setSelectedFurnitureId] = useState<string | null>(null);
   const [selectedDoorId, setSelectedDoorId] = useState<string | null>(null);
+  const [selectedWindowId, setSelectedWindowId] = useState<string | null>(null);
+
 
   const [history, setHistory] = useState<Array<Record<string, FurnitureItem[]>>>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(-1);
@@ -534,7 +538,10 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
         selectRoom,
         setSelectedFurnitureId,
         setSelectedDoorId,
+        selectedWindowId,
+        setSelectedWindowId,
         addFurniture,
+
         updateFurniture,
         removeFurniture,
         duplicateFurniture,
