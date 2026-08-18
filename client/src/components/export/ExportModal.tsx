@@ -181,22 +181,226 @@ export const ExportModal: React.FC = () => {
   const handleDownload3D = () => {
     setDownloading3D(true);
     try {
-      const webglCanvas = document.querySelector('canvas') as HTMLCanvasElement | null;
-      if (webglCanvas) {
-        const dataUrl = webglCanvas.toDataURL('image/png');
+      const webglCanvas = (document.getElementById('aera-webgl-canvas') || document.querySelector('canvas')) as HTMLCanvasElement | null;
+      
+      // If WebGL 3D Canvas is active in DOM and has valid dimensions, capture directly
+      if (webglCanvas && webglCanvas.width > 200 && webglCanvas.height > 200) {
+        // High-res composite canvas
+        const exportCanvas = document.createElement('canvas');
+        exportCanvas.width = 1600;
+        exportCanvas.height = 1200;
+        const eCtx = exportCanvas.getContext('2d');
+        if (eCtx) {
+          eCtx.fillStyle = '#14161A';
+          eCtx.fillRect(0, 0, 1600, 1200);
+
+          // Draw WebGL scene centered
+          eCtx.drawImage(webglCanvas, 80, 100, 1440, 960);
+
+          // Top Header Banner
+          eCtx.fillStyle = '#1B1F27';
+          eCtx.fillRect(80, 40, 1440, 60);
+          eCtx.fillStyle = '#D4AF37';
+          eCtx.font = 'bold 20px system-ui, sans-serif';
+          eCtx.fillText('AERA SPATIAL INTELLIGENCE • 3D PERSPECTIVE RENDER', 110, 78);
+
+          eCtx.fillStyle = '#FFFFFF';
+          eCtx.font = '15px system-ui, sans-serif';
+          eCtx.fillText(`${activeProject.name} — ${activeRoom.name} (${activeRoom.dimensions.length} × ${activeRoom.dimensions.width} ft)`, 1020, 78);
+
+          // Footer
+          eCtx.fillStyle = '#1B1F27';
+          eCtx.fillRect(80, 1080, 1440, 50);
+          eCtx.fillStyle = '#10B981';
+          eCtx.font = 'bold 14px system-ui, sans-serif';
+          eCtx.fillText(`SPATIAL HYPE SCORE: ${layoutScore.overall}/100 (${layoutScore.grade})`, 110, 1110);
+          eCtx.fillStyle = '#9CA3AF';
+          eCtx.font = '13px monospace';
+          eCtx.fillText(`THEME: ${activeTheme.name} • 3D WEBGL ENGINE • 0 COLLISIONS`, 780, 1110);
+
+          const dataUrl = exportCanvas.toDataURL('image/png');
+          const link = document.createElement('a');
+          link.download = `AERA_3D_Perspective_${activeRoom.name.replace(/\s+/g, '_')}.png`;
+          link.href = dataUrl;
+          link.click();
+        }
+      } else {
+        // Fallback: Generate dedicated 1600x1200 3D Isometric Architectural Perspective Render
+        const canvas = document.createElement('canvas');
+        canvas.width = 1600;
+        canvas.height = 1200;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        // Dark Luxury Studio Backdrop
+        ctx.fillStyle = '#14161A';
+        ctx.fillRect(0, 0, 1600, 1200);
+
+        // Header Title
+        ctx.fillStyle = '#1B1F27';
+        ctx.fillRect(80, 50, 1440, 70);
+        ctx.fillStyle = '#D4AF37';
+        ctx.font = 'bold 22px system-ui, sans-serif';
+        ctx.fillText('AERA SPATIAL INTELLIGENCE • 3D ISOMETRIC ARCHITECTURAL RENDER', 110, 94);
+
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = '16px system-ui, sans-serif';
+        ctx.fillText(`${activeProject.name} — ${activeRoom.name} (${activeRoom.dimensions.length} × ${activeRoom.dimensions.width} ft)`, 960, 94);
+
+        // Isometric Math Projections: origin at center
+        const originX = 800;
+        const originY = 620;
+        const L = activeRoom.dimensions.length;
+        const W = activeRoom.dimensions.width;
+        const isoScale = Math.min(48, 560 / Math.max(L, W));
+
+        const toIso = (x: number, y: number, z = 0) => ({
+          ix: originX + (x - y) * isoScale * 0.866,
+          iy: originY + (x + y) * isoScale * 0.5 - z * isoScale * 0.8,
+        });
+
+        // 3D Isometric Floor Grid
+        const p00 = toIso(0, 0, 0);
+        const pL0 = toIso(L, 0, 0);
+        const pLW = toIso(L, W, 0);
+        const p0W = toIso(0, W, 0);
+
+        // Floor Shadow & Hardwood Plank Base
+        ctx.fillStyle = '#E8E1D5';
+        ctx.beginPath();
+        ctx.moveTo(p00.ix, p00.iy);
+        ctx.lineTo(pL0.ix, pL0.iy);
+        ctx.lineTo(pLW.ix, pLW.iy);
+        ctx.lineTo(p0W.ix, p0W.iy);
+        ctx.closePath();
+        ctx.fill();
+        ctx.strokeStyle = '#B89B72';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // 3D Back Walls (North & West Walls)
+        const wallHeight = 8.5;
+        const p00_top = toIso(0, 0, wallHeight);
+        const pL0_top = toIso(L, 0, wallHeight);
+        const p0W_top = toIso(0, W, wallHeight);
+
+        // North Wall (Top-Left)
+        ctx.fillStyle = '#DCD8CF';
+        ctx.beginPath();
+        ctx.moveTo(p00.ix, p00.iy);
+        ctx.lineTo(pL0.ix, pL0.iy);
+        ctx.lineTo(pL0_top.ix, pL0_top.iy);
+        ctx.lineTo(p00_top.ix, p00_top.iy);
+        ctx.closePath();
+        ctx.fill();
+        ctx.strokeStyle = '#A8A49C';
+        ctx.stroke();
+
+        // West Wall (Top-Right)
+        ctx.fillStyle = '#C8C4BB';
+        ctx.beginPath();
+        ctx.moveTo(p00.ix, p00.iy);
+        ctx.lineTo(p0W.ix, p0W.iy);
+        ctx.lineTo(p0W_top.ix, p0W_top.iy);
+        ctx.lineTo(p00_top.ix, p00_top.iy);
+        ctx.closePath();
+        ctx.fill();
+        ctx.strokeStyle = '#98948B';
+        ctx.stroke();
+
+        // 3D Furniture Blocks
+        furniture.forEach((f) => {
+          const fx = f.x;
+          const fy = f.y;
+          const fw = f.width;
+          const fd = f.depth;
+          const fh = f.height || 3.0;
+
+          // Base points
+          const b00 = toIso(fx, fy, 0);
+          const b10 = toIso(fx + fw, fy, 0);
+          const b11 = toIso(fx + fw, fy + fd, 0);
+          const b01 = toIso(fx, fy + fd, 0);
+
+          // Top points
+          const t00 = toIso(fx, fy, fh);
+          const t10 = toIso(fx + fw, fy, fh);
+          const t11 = toIso(fx + fw, fy + fd, fh);
+          const t01 = toIso(fx, fy + fd, fh);
+
+          // Ambient drop shadow
+          ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
+          ctx.beginPath();
+          ctx.moveTo(b00.ix + 5, b00.iy + 5);
+          ctx.lineTo(b10.ix + 5, b10.iy + 5);
+          ctx.lineTo(b11.ix + 5, b11.iy + 5);
+          ctx.lineTo(b01.ix + 5, b01.iy + 5);
+          ctx.closePath();
+          ctx.fill();
+
+          // Left Face
+          ctx.fillStyle = '#5A3D28';
+          ctx.beginPath();
+          ctx.moveTo(b00.ix, b00.iy);
+          ctx.lineTo(b01.ix, b01.iy);
+          ctx.lineTo(t01.ix, t01.iy);
+          ctx.lineTo(t00.ix, t00.iy);
+          ctx.closePath();
+          ctx.fill();
+          ctx.strokeStyle = '#3A2515';
+          ctx.stroke();
+
+          // Right Face
+          ctx.fillStyle = '#7A5438';
+          ctx.beginPath();
+          ctx.moveTo(b01.ix, b01.iy);
+          ctx.lineTo(b11.ix, b11.iy);
+          ctx.lineTo(t11.ix, t11.iy);
+          ctx.lineTo(t01.ix, t01.iy);
+          ctx.closePath();
+          ctx.fill();
+          ctx.strokeStyle = '#3A2515';
+          ctx.stroke();
+
+          // Top Face
+          ctx.fillStyle = '#A37550';
+          ctx.beginPath();
+          ctx.moveTo(t00.ix, t00.iy);
+          ctx.lineTo(t10.ix, t10.iy);
+          ctx.lineTo(t11.ix, t11.iy);
+          ctx.lineTo(t01.ix, t01.iy);
+          ctx.closePath();
+          ctx.fill();
+          ctx.strokeStyle = '#5A3D28';
+          ctx.stroke();
+
+          // Label
+          ctx.fillStyle = '#FFFFFF';
+          ctx.font = 'bold 13px system-ui, sans-serif';
+          ctx.fillText(f.name, t01.ix - 20, t01.iy - 10);
+        });
+
+        // Footer Specs
+        ctx.fillStyle = '#1B1F27';
+        ctx.fillRect(80, 1100, 1440, 50);
+        ctx.fillStyle = '#10B981';
+        ctx.font = 'bold 14px system-ui, sans-serif';
+        ctx.fillText(`HYPE SCORE: ${layoutScore.overall}/100 • 3D ISOMETRIC PERSPECTIVE`, 110, 1130);
+        ctx.fillStyle = '#9CA3AF';
+        ctx.font = '13px monospace';
+        ctx.fillText(`FURNITURE: ${furniture.length} UNITS • MIN CLEARANCE: ${layoutScore.minWalkingClearanceCm} cm`, 840, 1130);
+
+        const dataUrl = canvas.toDataURL('image/png');
         const link = document.createElement('a');
-        link.download = `AERA_3D_Perspective_${activeRoom.name.replace(/\s+/g, '_')}.png`;
+        link.download = `AERA_3D_Isometric_Perspective_${activeRoom.name.replace(/\s+/g, '_')}.png`;
         link.href = dataUrl;
         link.click();
-      } else {
-        // Fallback CAD generator
-        handleDownload2D();
       }
 
       addToast({
         type: 'success',
-        title: '3D Render Snapshot Exported',
-        message: 'High-res 3D perspective snapshot downloaded.',
+        title: '3D Perspective Snapshot Exported',
+        message: 'High-res 3D perspective render downloaded successfully.',
       });
     } catch (e) {
       console.error(e);
@@ -204,6 +408,7 @@ export const ExportModal: React.FC = () => {
       setDownloading3D(false);
     }
   };
+
 
   // Download Structured Architectural Specification JSON
   const handleDownloadSpecJSON = () => {

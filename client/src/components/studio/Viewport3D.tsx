@@ -171,7 +171,9 @@ export const Viewport3D: React.FC = () => {
     rendererRef.current = renderer;
 
     container.innerHTML = '';
+    renderer.domElement.id = 'aera-webgl-canvas';
     container.appendChild(renderer.domElement);
+
 
     updateCameraPosition();
 
