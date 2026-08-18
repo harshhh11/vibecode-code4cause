@@ -10,9 +10,9 @@ import {
   Zap,
   ShieldCheck,
   Palette,
-  Award,
   Maximize2,
 } from 'lucide-react';
+
 
 
 export const LandingPage: React.FC = () => {
@@ -80,22 +80,15 @@ export const LandingPage: React.FC = () => {
 
       {/* Hero Section */}
       <section className="pt-16 pb-20 px-6 lg:px-12 max-w-7xl mx-auto flex flex-col items-center text-center space-y-8">
-        {/* Feature Ribbon */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-linear-to-r from-amber-500/10 via-amber-500/20 to-amber-500/10 dark:from-amber-400/10 dark:via-amber-400/20 dark:to-amber-400/10 border border-amber-500/30 text-[#8C5232] dark:text-[#D4AF37] text-xs font-extrabold uppercase tracking-wider animate-fadeIn shadow-xs">
-          <Award className="w-3.5 h-3.5 text-[#D4AF37]" />
-          <span>Next-Gen Deterministic CAD Math & Procedural 3D WebGL</span>
-        </div>
-
-
         <div className="space-y-4 max-w-3xl">
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-neutral-950 dark:text-white tracking-tight leading-[1.08]">
-            Architectural Precision. <br />
+            Design your space, <br />
             <span className="bg-linear-to-r from-[#B26A4A] via-[#D4AF37] to-[#8C5232] dark:from-[#D4AF37] dark:via-[#F3E5AB] dark:to-[#C5A059] bg-clip-text text-transparent">
-              Zero Guesswork.
+              your way.
             </span>
           </h1>
           <p className="text-base sm:text-lg text-neutral-600 dark:text-neutral-300 font-normal leading-relaxed max-w-2xl mx-auto">
-            AERA pairs deterministic whole-room dimension calculations with instant door swing clearance checks, procedural 3D photorealism, and real-time architect collaboration.
+            AERA pairs whole-home dimension recommendations with collision math, door swing clearance, and verified interior designer collaboration.
           </p>
         </div>
 
@@ -117,29 +110,6 @@ export const LandingPage: React.FC = () => {
           </button>
         </div>
 
-        {/* Live Key Metrics Banner */}
-        <div className="w-full max-w-4xl grid grid-cols-2 md:grid-cols-4 gap-3 pt-6">
-          <div className="p-4 bg-white/80 dark:bg-[#12161E]/80 backdrop-blur-md rounded-2xl border border-[#E8E6DF] dark:border-[#21262D] shadow-xs text-left">
-            <span className="text-[10px] font-mono text-neutral-400 dark:text-neutral-500 uppercase font-bold block">Collision Safety</span>
-            <span className="text-xl font-black text-emerald-600 dark:text-emerald-400">0 Collisions</span>
-            <p className="text-[10px] text-neutral-500 mt-0.5">Strict door swing arcs</p>
-          </div>
-          <div className="p-4 bg-white/80 dark:bg-[#12161E]/80 backdrop-blur-md rounded-2xl border border-[#E8E6DF] dark:border-[#21262D] shadow-xs text-left">
-            <span className="text-[10px] font-mono text-neutral-400 dark:text-neutral-500 uppercase font-bold block">Walking Clearance</span>
-            <span className="text-xl font-black text-[#8C5232] dark:text-[#D4AF37]">92+ cm Clear</span>
-            <p className="text-[10px] text-neutral-500 mt-0.5">AIA circulation standards</p>
-          </div>
-          <div className="p-4 bg-white/80 dark:bg-[#12161E]/80 backdrop-blur-md rounded-2xl border border-[#E8E6DF] dark:border-[#21262D] shadow-xs text-left">
-            <span className="text-[10px] font-mono text-neutral-400 dark:text-neutral-500 uppercase font-bold block">Physics Solver</span>
-            <span className="text-xl font-black text-neutral-900 dark:text-white">&lt; 45ms</span>
-            <p className="text-[10px] text-neutral-500 mt-0.5">Real-time vector engine</p>
-          </div>
-          <div className="p-4 bg-white/80 dark:bg-[#12161E]/80 backdrop-blur-md rounded-2xl border border-[#E8E6DF] dark:border-[#21262D] shadow-xs text-left">
-            <span className="text-[10px] font-mono text-neutral-400 dark:text-neutral-500 uppercase font-bold block">Material Sync</span>
-            <span className="text-xl font-black text-sky-600 dark:text-sky-400">5-Surface</span>
-            <p className="text-[10px] text-neutral-500 mt-0.5">Custom palette engine</p>
-          </div>
-        </div>
 
         {/* Hero Interactive Teaser Mockup */}
         <div className="w-full max-w-5xl pt-4">

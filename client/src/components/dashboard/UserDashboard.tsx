@@ -11,15 +11,13 @@ import {
   Award,
   Layers,
   Box,
-  MessageSquare,
-  TrendingUp,
 } from 'lucide-react';
-
 
 export const UserDashboard: React.FC = () => {
   const { setCurrentView, setStudioMode, addToast } = useUI();
-  const { projects, selectProject, activeTheme } = useProject();
+  const { projects, selectProject } = useProject();
   const { user } = useAuth();
+
 
   const handleOpenProject = (projectId: string, mode: '2d' | '3d' = '2d') => {
     selectProject(projectId);
@@ -61,53 +59,7 @@ export const UserDashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* KPI Highlight Strip */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="p-4 bg-white dark:bg-[#161B22] rounded-2xl border border-[#E8E6DF] dark:border-[#21262D] shadow-xs flex items-center justify-between">
-          <div className="space-y-0.5">
-            <span className="text-[10px] font-mono font-bold text-neutral-400 uppercase">Active Palette</span>
-            <h4 className="text-sm font-extrabold text-neutral-900 dark:text-white">{activeTheme.name}</h4>
-            <span className="text-[10px] text-neutral-500 capitalize">{activeTheme.style} Harmony</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <span className="w-4 h-4 rounded-full border border-black/10 shadow-2xs" style={{ backgroundColor: activeTheme.palette.walls }} />
-            <span className="w-4 h-4 rounded-full border border-black/10 shadow-2xs" style={{ backgroundColor: activeTheme.palette.furniture }} />
-            <span className="w-4 h-4 rounded-full border border-black/10 shadow-2xs" style={{ backgroundColor: activeTheme.palette.accent }} />
-          </div>
-        </div>
 
-        <div className="p-4 bg-white dark:bg-[#161B22] rounded-2xl border border-[#E8E6DF] dark:border-[#21262D] shadow-xs flex items-center justify-between">
-          <div className="space-y-0.5">
-            <span className="text-[10px] font-mono font-bold text-neutral-400 uppercase">Average Spatial Score</span>
-            <div className="flex items-center gap-1.5">
-              <h4 className="text-sm font-extrabold text-emerald-600 dark:text-emerald-400">92.5/100</h4>
-              <span className="text-[9px] font-mono font-bold bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 px-1.5 py-0.5 rounded">
-                Grade A
-              </span>
-            </div>
-            <span className="text-[10px] text-neutral-500">0 Spatial Collisions</span>
-          </div>
-          <div className="w-8 h-8 rounded-xl bg-emerald-50 dark:bg-emerald-950/80 text-emerald-600 flex items-center justify-center">
-            <TrendingUp className="w-4 h-4" />
-          </div>
-        </div>
-
-        <div className="p-4 bg-white dark:bg-[#161B22] rounded-2xl border border-[#E8E6DF] dark:border-[#21262D] shadow-xs flex items-center justify-between">
-          <div className="space-y-0.5">
-            <span className="text-[10px] font-mono font-bold text-neutral-400 uppercase">Architect Consultations</span>
-            <h4 className="text-sm font-extrabold text-neutral-900 dark:text-white">Ethan Rodrigues (AIA)</h4>
-            <span className="text-[10px] text-neutral-500">1 Unread Revision Ready</span>
-          </div>
-          <button
-            onClick={() => setCurrentView('chat')}
-            className="p-2 bg-[#FAF4ED] dark:bg-[#282115] text-[#8C5232] dark:text-[#D4AF37] rounded-xl hover:scale-105 transition-all"
-            title="Open Messages"
-          >
-            <MessageSquare className="w-4 h-4" />
-          </button>
-
-        </div>
-      </div>
 
       {/* Projects Grid */}
       <div className="space-y-4">
