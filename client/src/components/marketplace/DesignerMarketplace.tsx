@@ -50,15 +50,16 @@ export const DesignerMarketplace: React.FC = () => {
         <div>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#FAF4ED] dark:bg-[#282115] border border-[#E5D4C4] dark:border-[#523E28] rounded-full text-xs font-bold text-[#8C5232] dark:text-[#D4AF37] uppercase tracking-wider mb-2">
             <UserCheck className="w-3.5 h-3.5" />
-            <span>Verified Spatial Architects</span>
+            <span>Verified Spatial Architects & Designers</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-950 dark:text-white tracking-tight">
-            Find Your Interior Designer
+            Collaborate with Architects & Interior Designers
           </h1>
           <p className="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-1 max-w-2xl">
-            Collaborate with certified spatial planners directly inside AERA. Share live 2D/3D blueprints and receive layout optimizations without exchanging personal contact info.
+            Collaborate with certified AIA architects and interior designers directly inside AERA. Share live 2D/3D blueprints, request structural CAD sign-offs, and receive layout optimizations without exchanging personal contact info.
           </p>
         </div>
+
       </div>
 
       {/* Search & Style Filter Bar */}

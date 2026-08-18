@@ -11,30 +11,32 @@ import {
   Home,
   LogOut,
   Settings,
+  Building,
 } from 'lucide-react';
 
 export const Sidebar: React.FC = () => {
   const { currentView, setCurrentView } = useUI();
   const { user, role, setRole, logout } = useAuth();
 
+  const isProfessional = role === 'designer' || role === 'architect';
+
   const navItems = [
     {
-      id: role === 'designer' ? 'designer_dashboard' : 'dashboard',
-      label: role === 'designer' ? 'Designer Board' : 'Dashboard',
+      id: isProfessional ? 'designer_dashboard' : 'dashboard',
+      label: role === 'architect' ? 'Architect Board' : role === 'designer' ? 'Designer Board' : 'Dashboard',
       icon: LayoutDashboard,
     },
     { id: 'studio', label: 'Design Studio', icon: Box },
-    { id: 'marketplace', label: 'Find Designers', icon: Compass },
+    { id: 'marketplace', label: 'Architects & Designers', icon: Compass },
     { id: 'chat', label: 'Messages', icon: MessageSquare, badge: '2' },
     { id: 'saved_layouts', label: 'Saved Layouts', icon: Bookmark },
     { id: 'settings', label: 'Profile & Settings', icon: Settings },
   ];
 
-
   return (
     <aside className="w-64 bg-[#F5F4EF] dark:bg-[#0D1117] border-r border-[#E8E6DF] dark:border-[#21262D] flex flex-col justify-between h-screen sticky top-0 select-none z-30 transition-colors duration-200">
       {/* Brand Header */}
-      <div className="p-5 space-y-6">
+      <div className="p-5 space-y-5">
         <div
           onClick={() => setCurrentView('dashboard')}
           className="flex items-center gap-3 cursor-pointer group"
@@ -52,21 +54,21 @@ export const Sidebar: React.FC = () => {
           </div>
         </div>
 
-        {/* Role Persona Switcher Pill */}
-        <div className="p-1 bg-[#ECEAE3] dark:bg-[#161B22] rounded-xl flex items-center gap-1 border border-[#DFDDD5] dark:border-[#30363D]">
+        {/* 3-Way Role Persona Switcher Pill (Homeowner | Designer | Architect) */}
+        <div className="p-1 bg-[#ECEAE3] dark:bg-[#161B22] rounded-xl flex items-center gap-0.5 border border-[#DFDDD5] dark:border-[#30363D]">
           <button
             onClick={() => {
               setRole('user');
               setCurrentView('dashboard');
             }}
-            className={`flex-1 py-1.5 rounded-lg text-[11px] font-bold flex items-center justify-center gap-1 transition-all ${
+            className={`flex-1 py-1.5 rounded-lg text-[10px] font-bold flex items-center justify-center gap-1 transition-all ${
               role === 'user'
                 ? 'bg-white dark:bg-[#21262D] text-neutral-950 dark:text-white shadow-2xs'
                 : 'text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-white'
             }`}
           >
-            <Home className="w-3 h-3 text-[#B26A4A] dark:text-[#D4AF37]" />
-            <span>Homeowner</span>
+            <Home className="w-2.5 h-2.5 text-[#B26A4A] dark:text-[#D4AF37]" />
+            <span>Owner</span>
           </button>
 
           <button
@@ -74,14 +76,29 @@ export const Sidebar: React.FC = () => {
               setRole('designer');
               setCurrentView('designer_dashboard');
             }}
-            className={`flex-1 py-1.5 rounded-lg text-[11px] font-bold flex items-center justify-center gap-1 transition-all ${
+            className={`flex-1 py-1.5 rounded-lg text-[10px] font-bold flex items-center justify-center gap-1 transition-all ${
               role === 'designer'
                 ? 'bg-white dark:bg-[#21262D] text-neutral-950 dark:text-white shadow-2xs'
                 : 'text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-white'
             }`}
           >
-            <UserCheck className="w-3 h-3 text-blue-600 dark:text-sky-400" />
+            <UserCheck className="w-2.5 h-2.5 text-purple-600 dark:text-purple-400" />
             <span>Designer</span>
+          </button>
+
+          <button
+            onClick={() => {
+              setRole('architect');
+              setCurrentView('designer_dashboard');
+            }}
+            className={`flex-1 py-1.5 rounded-lg text-[10px] font-bold flex items-center justify-center gap-1 transition-all ${
+              role === 'architect'
+                ? 'bg-white dark:bg-[#21262D] text-neutral-950 dark:text-white shadow-2xs'
+                : 'text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-white'
+            }`}
+          >
+            <Building className="w-2.5 h-2.5 text-blue-600 dark:text-sky-400" />
+            <span>Architect</span>
           </button>
         </div>
 
@@ -118,35 +135,26 @@ export const Sidebar: React.FC = () => {
       {/* User Profile & Actions Footer */}
       <div className="p-4 border-t border-[#E8E6DF] dark:border-[#21262D] space-y-3 bg-[#F0EEE8] dark:bg-[#12161E] transition-colors">
         <div className="flex items-center gap-3">
-          <div
-            onClick={() => setCurrentView('settings')}
-            className="flex items-center gap-3 min-w-0 flex-1 cursor-pointer group"
-            title="Open Profile & Settings"
-          >
-            <img
-              src={user.avatar}
-              alt={user.name}
-              className="w-9 h-9 rounded-full object-cover border border-[#E0DDD3] dark:border-[#30363D] group-hover:ring-2 group-hover:ring-[#D4AF37] transition-all"
-            />
-            <div className="min-w-0 flex-1">
-              <h4 className="text-xs font-bold text-neutral-900 dark:text-neutral-100 truncate group-hover:text-[#B26A4A] dark:group-hover:text-[#D4AF37] transition-colors">
-                {user.name}
-              </h4>
-              <p className="text-[10px] text-neutral-500 dark:text-neutral-400 truncate capitalize font-medium">
-                {role === 'designer' ? 'Verified Spatial Architect' : 'Standard Member'}
-              </p>
-            </div>
+          <img
+            src={user.avatar}
+            alt={user.name}
+            className="w-9 h-9 rounded-full object-cover border border-neutral-300 dark:border-neutral-700 shadow-2xs"
+          />
+          <div className="flex-1 min-w-0">
+            <h4 className="text-xs font-bold text-neutral-900 dark:text-white truncate">{user.name}</h4>
+            <p className="text-[10px] text-neutral-500 dark:text-neutral-400 capitalize truncate">
+              {role === 'architect' ? 'Licensed Architect (AIA)' : role === 'designer' ? 'Interior Designer' : 'Homeowner Member'}
+            </p>
           </div>
           <button
             onClick={logout}
             title="Sign Out"
-            className="text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 p-1 rounded-lg transition-colors"
+            className="p-1.5 text-neutral-400 hover:text-rose-600 rounded-lg hover:bg-neutral-200/50 dark:hover:bg-neutral-800 transition-colors"
           >
             <LogOut className="w-4 h-4" />
           </button>
         </div>
       </div>
-
     </aside>
   );
 };
